@@ -4,7 +4,7 @@
       <div class="panel-heading">
         <h3 class="panel-title">
           {{stock.name}}
-          <small>@ ${{stock.price}}</small>
+          <small>@ {{stock.price | currency}}</small>
         </h3>
       </div>
       <div class="panel-body">
@@ -12,7 +12,7 @@
           <input type="number" class="form-control" placeholder="Quantity" v-model="quantity">
         </div>
         <div class="pull-right">
-          <button class="btn btn-info" @click="buyStock" :disabled="quantity<=0">Buy</button>
+          <button class="btn btn-info" @click="buyStock" :disabled="insufficientFunds || quantity<=0">Buy</button>
         </div>
       </div>
     </div>
@@ -24,7 +24,16 @@
     props: ['stock'],
     data: () => {
       return {
-        quantity: 0,
+        quantity: 0
+      }
+    },
+    // use computed to watch the store 
+    computed: {
+      funds(){
+        return this.$store.getters.funds;
+      },
+      insufficientFunds(){
+        return this.quantity * this.stock.price > this.funds;
       }
     },
     methods: {
@@ -34,7 +43,7 @@
           stockPrice: this.stock.price,
           quantity: this.quantity
         }
-        console.log(order);
+        this.$store.dispatch('buyStock',order);
         this.quantity = 0;
       }
     }

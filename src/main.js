@@ -7,6 +7,11 @@ import store from './store/store';
 
 Vue.use(VueRouter);
 
+// Have it here because Header and Home components use it
+Vue.filter('currency', (value) => {
+  return '$' + value.toLocaleString();
+})
+
 const router = new VueRouter({
   mode: 'history',
   routes
