@@ -1,6 +1,6 @@
-# vuestock
+# Demo Vuex Stock Trading App
 
-> A Vue.js project
+This app demonstrates the use of Vuex with Firebase as the backend.
 
 ## Build Setup
 

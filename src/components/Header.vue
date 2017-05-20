@@ -15,12 +15,15 @@
         <strong class="navbar-text navbar-right">Cash: {{ funds | currency }}</strong>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#" @click="endDay">End Day</a></li>
-          <li class="dropdown">
-
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Save & Load <span class="caret"></span></a>
+          <li class="dropdown" :class="{open: isDropdownOpen}" @click="isDropdownOpen = !isDropdownOpen">
+            <a href="#" class="dropdown-toggle" 
+              data-toggle="dropdown" 
+              role="button" 
+              aria-haspopup="true" 
+              aria-expanded="false">Save & Load <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Save</a></li>
-              <li><a href="#">Load</a></li>
+              <li><a href="#" @click="saveData">Save</a></li>
+              <li><a href="#" @click="loadData">Load</a></li>
             </ul>
           </li>
         </ul>
@@ -30,17 +33,34 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex';
+  import {mapActions, mapGetters} from 'vuex';
   export default {
-    computed: {
-      funds() {
-        return this.$store.getters.funds;
+    data () {
+      return {
+        isDropdownOpen: false
       }
     },
+    computed: {
+      ...mapGetters(['stocks','portfolio','funds'])
+    },
     methods: {
-      ...mapActions(['randomizeStocks']),
+      ...mapActions({
+        randomizeStocks: 'randomizeStocks', 
+        loadDataAction: 'loadData'
+      }),
       endDay() {
         this.randomizeStocks();
+      },
+      saveData() {
+        const data = {
+          funds: this.funds,
+          stocks: this.stocks,
+          portfolio: this.portfolio
+        }
+        this.$http.put('data.json',data);
+      },
+      loadData() {
+        this.loadDataAction();
       }
     }
   }

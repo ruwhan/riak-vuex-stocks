@@ -7,19 +7,19 @@ const state = {
 // = reducers
 // modify state in store
 const mutations = {
-  'SET_STOCKS' (state, stocks) {
+  'LOAD_STOCKS' (state, stocks) {
     state.stocks = stocks;
   },
   'RANDOMIZE_STOCKS' (state) {
     state.stocks.forEach(stock => {
       stock.price = Math.round(stock.price * (Math.random() + 0.5))
     });
-  }
+  },
 };
 
 const actions = {
   initStocks: ({commit}) => {
-    commit('SET_STOCKS', stocks)
+    commit('LOAD_STOCKS', stocks)
   },
   randomizeStocks: ({commit}) => {
     commit('RANDOMIZE_STOCKS');
