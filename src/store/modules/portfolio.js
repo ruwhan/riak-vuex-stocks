@@ -64,7 +64,7 @@ const getters = {
    * 
    * @param {Object}  state
    * @param {Object}  getters
-   * @returns { number }
+   * @returns {Number}
    */
   totalValue: (state, getters) => {
     return getters.portfolio.reduce((sum, item) => {

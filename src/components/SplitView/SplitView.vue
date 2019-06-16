@@ -1,11 +1,26 @@
 <template>
   <div>
-    <h2>Split View</h2>
     <div class="flex-row ">
       <div class="half-width portfolio">
+        <div class="text-center">
+          <h3>
+            Portfolio 
+            <small title="Drag item to the right hand side column to sell stocks">
+              <i class="glyphicon glyphicon-question-sign"></i>
+            </small>
+          </h3>
+        </div>
         <DraggablePortfolio />
       </div>
       <div class="half-width stocks">
+        <div class="text-center">
+          <h3>
+            Available Stocks
+            <small title="Drag item to the left hand side column to buy a stock">
+              <i class="glyphicon glyphicon-question-sign"></i>
+            </small>
+          </h3>
+        </div>
         <DraggableStocks />
       </div>
     </div>
