@@ -6,16 +6,19 @@
           <router-view></router-view>
         </transition>
     </div>
+    <movement-modal />
   </div>
 </template>
 
 <script>
-import AppHeader from './components/Header.vue';
 import { DATABASE } from "./config";
+import AppHeader from './components/Header.vue';
+import MovementModal from "./components/Movements/MovementModal.vue";
 
 export default {
   components: {
-    AppHeader
+    AppHeader,
+    MovementModal,
   }, 
   created(){
     // Vue instance is created in the lifecycle

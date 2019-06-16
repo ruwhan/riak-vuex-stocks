@@ -10,7 +10,7 @@
       return {
         options: {
           fullWidth: true,
-          height: 600,
+          height: 420,
           lineSmooth: true,
         },
       }

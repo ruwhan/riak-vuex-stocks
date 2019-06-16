@@ -57,7 +57,8 @@
       }),
       endDay() {
         this.endDayAction();
-        this.$router.push({ path: '/movement' });
+        this.$modal.show('movement_chart');
+        // this.$router.push({ path: '/movement' });
       },
       saveData() {
         this.saveDataAction();
