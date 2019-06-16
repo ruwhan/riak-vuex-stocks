@@ -1,10 +1,12 @@
+import { BUY_STOCK, LOAD_PORTFOLIO, SELL_STOCK } from "../constants";
+
 const state = {
   funds: 10000,
-  stocksOwned: []
+  stocksOwned: [],
 }
 
 const mutations = {
-  'BUY_STOCK' (state, order) {
+  [BUY_STOCK] (state, order) {
     const { stockId, stockPrice, quantity } = order;
     const record = state.stocksOwned.find(stock => stock.id == stockId);
     if(record) {
@@ -18,7 +20,7 @@ const mutations = {
     }
     state.funds -= stockPrice * quantity;
   },
-  'SELL_STOCK' (state, order) {
+  [SELL_STOCK] (state, order) {
     const { stockId, stockPrice, quantity } = order;
     const record = state.stocksOwned.find(stock => stock.id == stockId);
     if(record.quantity > quantity) {
@@ -28,19 +30,19 @@ const mutations = {
     }
     state.funds += stockPrice * quantity;
   },
-  'LOAD_PORTFOLIO' (state, portfolio) {
+  [LOAD_PORTFOLIO] (state, portfolio) {
     state.funds = portfolio.funds;
-    state.stocksOwned = portfolio.portfolio ? portfolio.portfolio : [];
-  }
+    state.stocksOwned = portfolio.stocksOwned ? portfolio.stocksOwned : [];
+  },
 }
 
 const actions = {
   buyStock: ({commit}, order) => {
-    commit('BUY_STOCK', order);
+    commit(BUY_STOCK, order);
   },
   sellStock: ({commit}, order) => {
-    commit('SELL_STOCK', order)
-  }
+    commit(SELL_STOCK, order)
+  },
 }
 
 const getters = {
@@ -56,7 +58,19 @@ const getters = {
       }
     })
   },
-  funds: state => state.funds
+  funds: state => state.funds,
+  /**
+   * Total value of portfolio.
+   * 
+   * @param {Object}  state
+   * @param {Object}  getters
+   * @returns { number }
+   */
+  totalValue: (state, getters) => {
+    return getters.portfolio.reduce((sum, item) => {
+      return sum += (item.quantity * item.price)
+    }, 0);
+  }
 }
 
 export default {

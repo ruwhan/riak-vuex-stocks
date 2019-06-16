@@ -11,10 +11,6 @@
     computed: {
       // assign state.portfolio to variable stocks
       ...mapGetters({stocks: 'portfolio'})
-      // the above is the same as:
-      // stocks() {
-      //   return this.$store.getters.portfolio;
-      // }
     },
     components: {
       Stock

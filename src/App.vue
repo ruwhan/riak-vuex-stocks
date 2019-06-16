@@ -2,24 +2,27 @@
   <div class="container">
     <AppHeader></AppHeader>
     <div class="row">
-      <div class="col-md-12">
         <transition name="slide" mode="out-in">
           <router-view></router-view>
         </transition>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
 import AppHeader from './components/Header.vue';
+import { DATABASE } from "./config";
+
 export default {
   components: {
     AppHeader
   }, 
   created(){
     // Vue instance is created in the lifecycle
-    this.$store.dispatch('initStocks');
+    this.$vlf.config({
+      name: DATABASE,
+    });
+    this.$store.dispatch('loadData');
   }
 }
 </script>

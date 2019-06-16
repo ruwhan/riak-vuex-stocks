@@ -1,0 +1,10 @@
+export const LOAD_STOCKS = 'LOAD_STOCKS';
+export const RANDOMIZE_STOCKS = 'RANDOMIZE_STOCKS';
+export const END_DAY = 'END_DAY';
+export const ADD_STOCK = 'ADD_STOCK';
+export const BUY_STOCK = 'BUY_STOCK';
+export const SELL_STOCK = 'SELL_STOCK';
+export const LOAD_PORTFOLIO = 'LOAD_PORTFOLIO';
+export const SHOW_SUCCESS_MESSAGE = 'SHOW_SUCCESS_MESSAGE';
+export const HIDE_SUCCESS_MESSAGE = 'HIDE_SUCCESS_MESSAGE';
+

@@ -1,5 +1,5 @@
 <template>
-  <div class="col-sm-6 col-md-4">
+  <div :class="getClassStyles">
     <div class="panel panel-success">
       <div class="panel-heading">
         <h3 class="panel-title">
@@ -21,8 +21,9 @@
 
 <script>
   import {mapActions} from 'vuex';
+
   export default {
-    props: ['stock'],
+    props: ['stock', 'additionalCssClass'],
     data: () => {
       return {
         quantity: 0,
@@ -42,6 +43,11 @@
         // which is the same as:
         // this.$store.dispatch('sellStock',order);
         this.quantity = 0;
+      }
+    },
+    computed: {
+      getClassStyles() {
+        return this.additionalCssClass || "col-sm-6 col-md-4"
       }
     }
   }

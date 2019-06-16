@@ -11,6 +11,7 @@
         <ul class="nav navbar-nav">
           <router-link to="/portfolio" activeClass="active" tag="li"><a>Portfolio</a></router-link>
           <router-link to="/stocks" activeClass="active" tag="li"><a>Stocks</a></router-link>
+          <router-link to="/split" activeClass="active" tag="li"><a>Split View</a></router-link>
         </ul>
         <strong class="navbar-text navbar-right">Cash: {{ funds | currency }}</strong>
         <ul class="nav navbar-nav navbar-right">
@@ -28,12 +29,17 @@
           </li>
         </ul>
       </div><!-- /.navbar-collapse -->
+      <div>
+        <floating-alert />
+      </div>
     </div><!-- /.container-fluid -->
   </nav>
 </template>
 
 <script>
   import {mapActions, mapGetters} from 'vuex';
+  import { FloatingAlert } from "./FloatingAlert.vue";
+
   export default {
     data () {
       return {
@@ -45,19 +51,16 @@
     },
     methods: {
       ...mapActions({
-        randomizeStocks: 'randomizeStocks', 
-        loadDataAction: 'loadData'
+        endDayAction: 'endDay',
+        loadDataAction: 'loadData',
+        saveDataAction: 'saveData'
       }),
       endDay() {
-        this.randomizeStocks();
+        this.endDayAction();
+        this.$router.push({ path: '/movement' });
       },
       saveData() {
-        const data = {
-          funds: this.funds,
-          stocks: this.stocks,
-          portfolio: this.portfolio
-        }
-        this.$http.put('data.json',data);
+        this.saveDataAction();
       },
       loadData() {
         this.loadDataAction();
