@@ -24,22 +24,37 @@ export default {
       stocks: 'stocks',
       movementRaw: 'movementRaw'
     }),
+    /**
+     * Get stock name property computed property.
+     * 
+     * @returns {String}
+     */
     stockName: {
       get() {
         return this.stock ? this.stock.name : ''
       }
     },
+    /**
+     * Find stock by url params computed property.
+     * 
+     * @returns {Object}
+     */
     stock() {
       const id = this.$route.params.id;
       return this.stocks.find(item => item.id === +id);
     },
+    /**
+     * Movement of a specific stock.
+     * 
+     * @returns {[Object]}
+     */
     movement() {
       return this.$store.getters.movementSeriesByStock(this.stockName);
     }
   },
   methods: {
     generateSeries() {
-      const series = [this.movement];
+      const series = [this.movement]; // Make a 2 dimensional array
       const labels = this.movementRaw.map((item, index) => `day ${(index + 1)}`);
 
       return {

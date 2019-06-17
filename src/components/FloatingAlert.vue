@@ -22,6 +22,11 @@
       ...mapGetters({
         successMessageShown: 'successMessageShown'
       }),
+      /**
+       * Get success message hidden state.
+       * 
+       * @returns {Boolean}
+       */
       isHidden() {
         return this.successMessageShown 
           ? "alert alert-success floating-alert" 

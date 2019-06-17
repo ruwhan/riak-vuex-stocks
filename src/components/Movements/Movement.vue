@@ -10,11 +10,6 @@
     </div>
   </div>
 </template>
-<style>
-  .chart {
-    /* width:  */
-  }
-</style>
 <script>
   import { mapGetters, mapState } from "vuex";
   import LineChart from "./LineChart.vue";

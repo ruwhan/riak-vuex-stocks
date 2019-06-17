@@ -41,11 +41,14 @@ export default Vue.component('mini-chart', {
       let scaled = 1;
       let d = 'M ';
       const series = this.series.map(n => {
-        // Flip value (max - n), because svg canvas coordinates flipped upside down.
+        // Flip value (max - n), because svg canvas `y` coordinates flipped upside down.
         scaled = Math.round(((max - n) / max) * 100);
         return scaled;
       });
 
+      // transformation happen here, `x axis` moving forward by 5 points,
+      // while `y axis` is got from scaled value from stock's daily 
+      // movement 
       d += series.map((n, index) => {
         return `${index * 5} ${n}`;
       });

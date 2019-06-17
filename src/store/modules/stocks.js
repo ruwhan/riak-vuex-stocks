@@ -87,6 +87,13 @@ const getters = {
   movementRaw: state => {
     return state.stockMovement;
   },
+  /**
+   * Get specific stock movement
+   * 
+   * @param {Object}  state
+   * @param {Object}  getters
+   * @returns {[Integer]}
+   */
   movementSeriesByStock: (state, getters) => (stockName) => {
     let temp; // Temporary variable to store object found in a loop
     return getters.movementRaw.map(
@@ -132,7 +139,7 @@ const getters = {
     });
 
 
-    // Get list of labels filled of day number.
+    // Get list of labels filled by day number.
     labels = stockMovement.map((item, index) => `day ${index + 1}`)
 
     return {
